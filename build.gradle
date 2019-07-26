@@ -45,7 +45,8 @@ dependencies {
 
 
     // Use JUnit test framework
-    testImplementation 'junit:junit:4.12'
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.1')
+    testImplementation('com.github.tomakehurst:wiremock:2.22.0')
 }
 
 // Define the main class for the application

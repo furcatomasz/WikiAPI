@@ -1,10 +1,11 @@
 package WikiAPI.Http.Dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class WikipediaPage {
   String title;
-  Integer pageid;
   String snippet;
 }

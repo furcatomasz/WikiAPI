@@ -1,9 +1,10 @@
 package WikiAPI;
 
+import WikiAPI.Config.WikipediaConfig;
 import WikiAPI.Http.Dto.WikipediaPage;
 import WikiAPI.Http.Dto.WikipediaSearchDto;
 import WikiAPI.Operation.GetClubInformationFromWikipedia;
-import WikiAPI.Operation.MatchWikipediaPageWithClubName;
+import WikiAPI.Operation.FindFootballClubWikipediaPage;
 import java.io.IOException;
 
 public class App {
@@ -15,10 +16,12 @@ public class App {
 
     String clubName = args[0];
     GetClubInformationFromWikipedia getClubInformationFromWikipedia =
-        new GetClubInformationFromWikipedia();
+        new GetClubInformationFromWikipedia(
+            WikipediaConfig.builder().apiBaseUrl("https://en.wikipedia.org").build()
+        );
+
     WikipediaSearchDto wikipediaSearchDto = getClubInformationFromWikipedia.execute(clubName);
-    WikipediaPage wikipediaPage =
-        new MatchWikipediaPageWithClubName().execute(wikipediaSearchDto, clubName);
+    WikipediaPage wikipediaPage = new FindFootballClubWikipediaPage().execute(wikipediaSearchDto);
 
     if(wikipediaPage == null) {
       System.out.println("Cannot find football club with given name.");
